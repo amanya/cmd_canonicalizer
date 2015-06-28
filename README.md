@@ -1,6 +1,6 @@
-# CmdCanonicalizer
+# cmd_canonicalizer [![Build Status](https://travis-ci.org/amanya/cmd_canonicalizer.png?branch=master)](https://travis-ci.org/amanya/cmd_canonicalizer)
 
-Canonicalizer for shell commands
+Ruby gem to canonicalize shell commands
 
 ```
 > require 'cmd_canonicalizer'
