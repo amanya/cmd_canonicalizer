@@ -36,4 +36,14 @@ describe CmdCanonicalizer do
     canonicalized_command = canonicalizer.canonicalize('git commit --no-edit --amend -f')
     expect(canonicalized_command).to eq 'git commit -f --amend --no-edit'
   end
+  it 'removes slash at the end of directory for ls' do
+    canonicalizer = CmdCanonicalizer.new
+    command_with_slash = canonicalizer.canonicalize('ls mydir/')
+    expect(command_with_slash).to eq 'ls mydir'
+  end
+  it 'does not removes slash at the end of directory for other commands' do
+    canonicalizer = CmdCanonicalizer.new
+    command_with_slash = canonicalizer.canonicalize('cp * mydir/')
+    expect(command_with_slash).to eq 'cp * mydir/'
+  end
 end

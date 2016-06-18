@@ -2,8 +2,12 @@ class CmdCanonicalizer
   def canonicalize(cmd)
     set_initial_values()
     args = cmd.split()
+    first_cmd = args.first
     args, command = process_command(args, "")
     opts, long_opts, remaining_args = process_arguments(args, [], [], [])
+    if @commands_which_i_can_strip_slashes.include?(first_cmd)
+      command = strip_final_slash(command)
+    end
     return compose_command(command, opts, long_opts, remaining_args)
   end
 
@@ -14,6 +18,7 @@ private
     @is_long_opt_regex = /^--[\w-]*$/
     @is_bundled_opt = /^-\w\w\w*$/
     @is_not_command = /^-.*$/
+    @commands_which_i_can_strip_slashes = ['ls']
   end
 
   def process_command(args, command)
@@ -61,6 +66,10 @@ private
       end
     end
     return opts, long_opts, remaining_args
+  end
+
+  def strip_final_slash(arg)
+    return arg.chomp('/')
   end
 
   def process_option(opt)
