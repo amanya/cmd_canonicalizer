@@ -18,7 +18,7 @@ private
     @is_long_opt_regex = /^--[\w-]*$/
     @is_bundled_opt = /^-\w\w\w*$/
     @is_not_command = /^-.*$/
-    @commands_which_i_can_strip_slashes = ['ls']
+    @commands_which_i_can_strip_slashes = ['ls', 'cd']
   end
 
   def process_command(args, command)

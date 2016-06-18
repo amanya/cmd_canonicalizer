@@ -41,6 +41,11 @@ describe CmdCanonicalizer do
     command_with_slash = canonicalizer.canonicalize('ls mydir/')
     expect(command_with_slash).to eq 'ls mydir'
   end
+   it 'removes slash at the end of directory for cd' do
+    canonicalizer = CmdCanonicalizer.new
+    command_with_slash = canonicalizer.canonicalize('cd mydir/')
+    expect(command_with_slash).to eq 'cd mydir'
+  end
   it 'does not removes slash at the end of directory for other commands' do
     canonicalizer = CmdCanonicalizer.new
     command_with_slash = canonicalizer.canonicalize('cp * mydir/')
